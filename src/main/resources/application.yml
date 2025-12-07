@@ -12,9 +12,9 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/bulla
-    username: postgres
-    password: samdoh
+    url: jdbc:postgresql://localhost:5432/bullapos
+    username: sam
+    password: samdoh123
     driver-class-name: org.postgresql.Driver
 
 security:

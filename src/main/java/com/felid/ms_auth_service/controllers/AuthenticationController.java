@@ -10,6 +10,7 @@ import com.felid.ms_auth_service.services.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -53,10 +54,16 @@ public class AuthenticationController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<User> authenticatedUser() {
+    public ResponseEntity<UserDto> authenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = (User) authentication.getPrincipal();
-        return ResponseEntity.ok(currentUser);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        UserDto user = UserDto.builder()
+                .userName(userDetails.getUsername())
+                .email(userDetails.getUsername()) // or fetch email if you have it
+                .build();
+
+        return ResponseEntity.ok(user);
     }
 
 }

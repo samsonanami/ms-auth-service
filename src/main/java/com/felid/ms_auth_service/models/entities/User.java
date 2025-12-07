@@ -29,6 +29,7 @@ public class User implements UserDetails {
     @Column(unique = true, length = 100, nullable = false)
     private String email;
 
+    @Getter
     @Column(nullable = false)
     private String password;
 
@@ -43,10 +44,6 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
